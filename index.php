@@ -83,28 +83,21 @@ div.row {
     position: relative;
     animation: helloSectionKeyframe 1s;
     animation-fill-mode: forwards;
-
 }
-
 @media (min-width: 0px) and (max-width: 761px) {
 
     #divHelloSection,
     #divLoginSection {
         animation: normal;
     }
-
 }
-
 div.main-div {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     transition: box-shadow 0.3s ease-in-out;
 }
-
 div.main-div:hover {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
 }
-
-
 
 h1 {
     font-size: 72px;
@@ -131,12 +124,12 @@ h1 {
                 <div id="divLoginSection" style="height: 100%" class="main-div col-md-6 col-sm-12 col-xs-12">
 
                     <h1 class="text-center m-5" style="font-family:URW Chancery L, cursive">
-                        <img src="login.png" alt="login Image"> Here
+                        <img src="images\login.png" alt="login Image"> Here
                     </h1>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <img src="user.png" alt="" style="width: 23px; height:23px" class="rounded-circle ">
+                                <img src="images\user.png" alt="user img" style="width: 23px; height:23px" class="rounded-circle ">
                             </span>
                         </div>
                         <input type="text" class="form-control" id="playerName" name="playerName"
@@ -146,7 +139,7 @@ h1 {
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <img src="key.png" alt="" style="width: 23px; height:23px" class="rounded-circle ">
+                                <img src="images\key.png" alt="password img" style="width: 23px; height:23px" class="rounded-circle ">
                             </span>
 
                         </div>
