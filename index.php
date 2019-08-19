@@ -1,3 +1,28 @@
+<?php
+session_start();
+
+
+ if(isset($_POST['login'])){ 
+    
+    if($_POST['playerName']=="admin" &&   $_POST['pwd']=="admin")
+    {
+        $_SESSION['isLoggedIn'] = true; 
+    }
+    else if($_POST['playerName']!="admin" ||   $_POST['pwd']!="admin")
+    {
+        echo "Error! Invalid password or user name";
+        $_SESSION['isLoggedIn'] = false; 
+    }
+   
+   
+ }
+
+ if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true)
+ {
+     header('Location: main.php');
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,88 +37,88 @@
     <title>Quiz Game</title>
 </head>
 <style>
-    body {
-        background: whitesmoke;
-    }
+body {
+    background: whitesmoke;
+}
 
-    div.row {
-        height: 100vh !important;
+div.row {
+    height: 100vh !important;
 
-    }
+}
 
-    @keyframes loginSectionKeyframe {
-        0% {
-            right: 0%;
-
-        }
-
-
-        100% {
-            right: 50%;
-
-        }
+@keyframes loginSectionKeyframe {
+    0% {
+        right: 0%;
 
     }
 
-    @keyframes helloSectionKeyframe {
-        0% {
-            left: 0%;
-        }
 
-        100% {
-            left: 50%;
-        }
+    100% {
+        right: 50%;
 
     }
 
+}
+
+@keyframes helloSectionKeyframe {
+    0% {
+        left: 0%;
+    }
+
+    100% {
+        left: 50%;
+    }
+
+}
+
+#divLoginSection {
+    background: white;
+    position: relative;
+    animation: loginSectionKeyframe 1s;
+    animation-fill-mode: forwards;
+}
+
+#divHelloSection {
+    background: linear-gradient(90deg, rgba(2, 0, 36, 0.5774509632954745) 0%, rgba(9, 9, 121, 1) 0%, rgba(61, 103, 136, 1) 0%, rgba(130, 148, 158, 1) 32%);
+    position: relative;
+    animation: helloSectionKeyframe 1s;
+    animation-fill-mode: forwards;
+
+}
+
+@media (min-width: 0px) and (max-width: 761px) {
+
+    #divHelloSection,
     #divLoginSection {
-        background: white;
-        position: relative;
-        animation: loginSectionKeyframe 7s;
-        animation-fill-mode: forwards;
+        animation: normal;
     }
 
-    #divHelloSection {
-        background: linear-gradient(90deg, rgba(2, 0, 36, 0.5774509632954745) 0%, rgba(9, 9, 121, 1) 0%, rgba(61, 103, 136, 1) 0%, rgba(130, 148, 158, 1) 32%);
-        position: relative;
-        animation: helloSectionKeyframe 7s;
-        animation-fill-mode: forwards;
+}
 
-    }
-     
-    @media (min-width: 0px) and (max-width: 761px) { 
+div.main-div {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+}
 
-        #divHelloSection,
-        #divLoginSection {
-            animation : normal;
-        }
-
-    }
-
-    div.main-div {
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-        transition: box-shadow 0.3s ease-in-out;
-    }
-
-    div.main-div:hover {
-        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-    }
+div.main-div:hover {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
 
 
 
-    h1 {
-        font-size: 72px;
-        background: rgb(125, 162, 108);
-        background: linear-gradient(90deg, rgba(125, 162, 108, 1) 0%, rgba(121, 161, 91, 1) 15%, rgba(71, 187, 47, 1) 45%, rgba(117, 138, 97, 1) 72%, rgba(11, 9, 9, 0.717506985704438) 100%, rgba(113, 171, 99, 1) 100%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+h1 {
+    font-size: 72px;
+    background: rgb(125, 162, 108);
+    background: linear-gradient(90deg, rgba(125, 162, 108, 1) 0%, rgba(121, 161, 91, 1) 15%, rgba(71, 187, 47, 1) 45%, rgba(117, 138, 97, 1) 72%, rgba(11, 9, 9, 0.717506985704438) 100%, rgba(113, 171, 99, 1) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 </style>
 
 <body>
 
     <div class="container mt-5 mb-5">
-        <form action="" class="form">
+        <form action="" class="form" method="post">
             <div class="row">
                 <div id="divHelloSection" style="height: 100%;" class="main-div col-md-6 col-sm-12 col-xs-12">
                     <div class="col-sm-12">
@@ -114,7 +139,8 @@
                                 <img src="user.png" alt="" style="width: 23px; height:23px" class="rounded-circle ">
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="playerName" placeholder="Enter Player Name">
+                        <input type="text" class="form-control" id="playerName" name="playerName"
+                            placeholder="Enter Player Name">
 
                     </div>
                     <div class="form-group input-group">
@@ -124,9 +150,9 @@
                             </span>
 
                         </div>
-                        <input type="password" class="form-control" id="pwd" placeholder="Enter Password">
+                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter Password">
                     </div>
-                    <button type="button"  class="btn btn-primary" style="width: 100%">Login</button>
+                    <button type="submit" name="login" class="btn btn-primary" style="width: 100%">Login</button>
 
                 </div>
 
