@@ -10,6 +10,67 @@
     {
         header('Location: index.php');
     }
+
+    
+
+    function getQuestions($questionsType = null)
+    {
+        $questions = [];
+
+        $connection = mysqli_connect("localhost", "root", "root","quizdatabase");
+
+        $sql = "SELECT * from questions";
+        
+        if($questionsType  != null)
+        {
+           $sql .= " WHERE type='".$questionsType."'";
+        }
+        $result = mysqli_query($connection, $sql);
+        if (!empty($result) && $result->num_rows > 0) {
+             // output data of each row 
+            while($row = mysqli_fetch_assoc($result)) {
+                 $questions[] = $row;
+            }
+        }
+        else{
+            echo "0 results";
+        } 
+
+        mysqli_close($connection); 
+
+        return $questions;
+    }
+
+
+    function getAnswers($questionsId = null)
+    {
+        $answers = [];
+
+        $connection = mysqli_connect("localhost", "root", "root","quizdatabase");
+
+        $sql = "SELECT * from answers";
+        
+        if($questionsId  != null)
+        {
+           $sql .= " WHERE question_id='".$questionsId."'";
+        }
+        $result = mysqli_query($connection, $sql);
+        if (!empty($result) && $result->num_rows > 0) {
+             // output data of each row 
+            while($row = mysqli_fetch_assoc($result)) {
+                 $answers[] = $row;
+            }
+        }
+        else{
+            echo "0 results";
+        } 
+
+        mysqli_close($connection); 
+
+        return $answers;
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,9 +125,53 @@
        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et perspiciatis qui impedit quisquam, ratione reprehenderit nemo nostrum modi quis, maiores consequatur iusto voluptate eveniet! Nobis est quisquam ex ipsam eligendi.
        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque delectus recusandae vitae similique incidunt possimus laudantium eligendi ipsam suscipit, itaque, illum voluptatum adipisci odit laboriosam blanditiis molestias doloribus officia et.
         </div>
-        <div class="tab-pane fade " id="cTab" role="tabpanel" aria-labelledby="pills-C-tab">A paragraph (from the Ancient Greek παράγραφος paragraphos, "to write beside" or "written beside") is a self-contained unit of a discourse in writing dealing with a particular point or idea. A paragraph consists of one or more sentences.</div>
-        <div class="tab-pane fade" id="cppTab" role="tabpanel" aria-labelledby="pills-C++-tab">..gdferh67jhgfd.</div>
-        <div class="tab-pane fade" id="cSharpTab" role="tabpanel" aria-labelledby="pills-CSharp-tab">C#</div>
+        <div class="tab-pane fade " id="cTab" role="tabpanel" aria-labelledby="pills-C-tab">
+            <div class="container col-lg-8">
+                   <form action="check.php" method="post">
+                     
+                         <?php $questions = getQuestions('c');  $index=1; ?>
+                      
+                         <?php foreach($questions as $question): ?>
+                         <div class="card"><?php echo $index.". ". $question['questions']?><br></div>
+                        <div >
+                               <?php   $answers = getAnswers($question['id']);?>  
+                               <?php foreach($answers as $answer): ?> 
+                               <div> 
+                                  <input type="radio" name="quizcheck[<?php echo $answer['question_id'];  ?>]" value="<?php echo $answer['id'];  ?>"> <?php echo  $answer['answer']?>  
+                               </div>
+                               <?php endforeach; ?> 
+
+                               <?php $index++; endforeach; ?>
+                        </div>
+                      <input type="submit" name="submit" class="btn btn-primary float-right" value="submit">
+                   </form>        
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="cppTab" role="tabpanel" aria-labelledby="pills-C++-tab">
+            
+            <?php 
+
+            $questions = getQuestions('cpp'); 
+            foreach($questions as $question) {    
+            ?>
+  
+             <div><?php echo $question['questions'] ?></div>
+           
+           <?php } ?>
+
+        </div>
+        <div class="tab-pane fade" id="cSharpTab" role="tabpanel" aria-labelledby="pills-CSharp-tab">
+            
+            <?php 
+            $questions = getQuestions('csharp'); 
+            foreach($questions as $question) {    
+              echo '<div>'.$question['questions'].'</div>';
+            } 
+            ?>
+
+
+        </div>
         <div class="tab-pane fade" id="javaTab" role="tabpanel" aria-labelledby=pills-Java-tab>java</div>
     </div>
 </body>
