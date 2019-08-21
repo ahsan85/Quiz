@@ -95,7 +95,7 @@
             </button>
             <div class="collapse navbar-collapse" id="colNav">
                 <ul class="navbar-nav nav" style="font-size:20px" role="tablist" id="pills-tab">
-                <a class="navbar-brand" href="/">Quiz Game</a>
+                    <a class="navbar-brand" href="/">Quiz Game</a>
                     <li class="nav-item">
                         <a  class="nav-link" id="pills-C-tab" data-toggle="pill" href="#cTab" role="tab" aria-controls="pills-home" aria-selected="false"> C Mcqs Test</a>
                     </li>
@@ -120,59 +120,166 @@
 
     </div>
     <div class="tab-content p-3" id="pills-tabContent" >
-        <div class="tab-pane fade show active " id="instTab" role="tabpanel" aria-labelledby="pills-inst-tab">
-       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi eligendi libero optio, tempora dicta impedit! Voluptates commodi officiis dolores quod accusantium? Et, sint sit! Et id consequatur quaerat illum laudantium!
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. Et perspiciatis qui impedit quisquam, ratione reprehenderit nemo nostrum modi quis, maiores consequatur iusto voluptate eveniet! Nobis est quisquam ex ipsam eligendi.
-       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque delectus recusandae vitae similique incidunt possimus laudantium eligendi ipsam suscipit, itaque, illum voluptatum adipisci odit laboriosam blanditiis molestias doloribus officia et.
-        </div>
-        <div class="tab-pane fade " id="cTab" role="tabpanel" aria-labelledby="pills-C-tab">
-            <div class="container col-lg-8">
-                   <form action="check.php" method="post">
+          
+          <div class="tab-pane fade show active " id="instTab" role="tabpanel" aria-labelledby="pills-inst-tab">
+                <div> 
+                    <h4 class="text-center">WELCOME IN QUIZ GAME</h4>
+                </div>
+          </div>
+          
+          <div class="tab-pane fade " id="cTab" role="tabpanel" aria-labelledby="pills-C-tab">
+                <div class="container col-lg-8">
+                        <form action="check.php" method="post">
                      
-                         <?php $questions = getQuestions('c');  $index=1; ?>
-                      
-                         <?php foreach($questions as $question): ?>
-                         <div class="card"><?php echo $index.". ". $question['questions']?><br></div>
-                        <div >
-                               <?php   $answers = getAnswers($question['id']);?>  
-                               <?php foreach($answers as $answer): ?> 
-                               <div> 
-                                  <input type="radio" name="quizcheck[<?php echo $answer['question_id'];  ?>]" value="<?php echo $answer['id'];  ?>"> <?php echo  $answer['answer']?>  
-                               </div>
-                               <?php endforeach; ?> 
+                                <?php 
+                                    $questions = getQuestions('c');
+                                    $index=1;  
+                                ?>
+                                <!-- Starting questions foreach loop -->
+                                <?php foreach($questions as $question): ?>
+                                <div class="card">
+                                    <?php echo $index.". ". $question['questions']; ?>
+                                    <br>
+                                </div>
+                                <div>
+                                    <?php  
+                                        $answers = getAnswers($question['id']);
+                                     ?>  
+                                    <!-- Starting answers foreach loop -->
+                                    <?php foreach($answers as $answer): ?> 
+                                        <div> 
+                                             <input type="radio" name="quizcheck[<?php echo $answer['question_id'];  ?>]" value="<?php echo $answer['id'];  ?>"> 
+                                             <?php echo  $answer['answer']; ?>  
+                                         </div>
+                                    <!--  Ending answers foreach loop -->
+                                    <?php endforeach; ?>  
+                                </div>
+                                 <!-- Ending questions foreach loop -->
+                                 <?php 
+                                        $index++; 
+                                        endforeach; 
+                                ?>
+                                <br>
+                                <input type="submit" name="submit" class="btn btn-primary" value="submit">
+                        </form>        
+                </div>
 
-                               <?php $index++; endforeach; ?>
-                        </div>
-                      <input type="submit" name="submit" class="btn btn-primary float-right" value="submit">
-                   </form>        
-            </div>
-
-        </div>
-        <div class="tab-pane fade" id="cppTab" role="tabpanel" aria-labelledby="pills-C++-tab">
-            
-            <?php 
-
-            $questions = getQuestions('cpp'); 
-            foreach($questions as $question) {    
-            ?>
-  
-             <div><?php echo $question['questions'] ?></div>
-           
-           <?php } ?>
-
-        </div>
-        <div class="tab-pane fade" id="cSharpTab" role="tabpanel" aria-labelledby="pills-CSharp-tab">
-            
-            <?php 
-            $questions = getQuestions('csharp'); 
-            foreach($questions as $question) {    
-              echo '<div>'.$question['questions'].'</div>';
-            } 
-            ?>
-
-
-        </div>
-        <div class="tab-pane fade" id="javaTab" role="tabpanel" aria-labelledby=pills-Java-tab>java</div>
+          </div>
+          
+          <div class="tab-pane fade" id="cppTab" role="tabpanel" aria-labelledby="pills-C++-tab">
+                 <div class="container col-lg-8">
+                        <form action="check.php" method="post">
+                     
+                                <?php 
+                                    $questions = getQuestions('cpp');
+                                    $index=1;  
+                                ?>
+                                <!-- Starting questions foreach loop -->
+                                <?php foreach($questions as $question): ?>
+                                <div class="card">
+                                    <?php echo $index.". ". $question['questions']; ?>
+                                    <br>
+                                </div>
+                                <div>
+                                    <?php  
+                                        $answers = getAnswers($question['id']);
+                                     ?>  
+                                    <!-- Starting answers foreach loop -->
+                                    <?php foreach($answers as $answer): ?> 
+                                        <div> 
+                                             <input type="radio" name="quizcheck[<?php echo $answer['question_id'];  ?>]" value="<?php echo $answer['id'];  ?>"> 
+                                             <?php echo  $answer['answer']; ?>  
+                                         </div>
+                                    <!--  Ending answers foreach loop -->
+                                    <?php endforeach; ?>  
+                                </div>
+                                 <!-- Ending questions foreach loop -->
+                                <?php 
+                                        $index++; 
+                                        endforeach; 
+                                ?>
+                                <br>
+                                <input type="submit" name="submit" class="btn btn-primary" value="submit">
+                        </form>        
+                   </div>
+          </div>
+          
+          <div class="tab-pane fade" id="cSharpTab" role="tabpanel" aria-labelledby="pills-CSharp-tab">
+                     <div class="container col-lg-8">
+                        <form action="check.php" method="post">
+                     
+                                <?php 
+                                    $questions = getQuestions('c');
+                                    $index=1;  
+                                ?>
+                                <!-- Starting questions foreach loop -->
+                                <?php foreach($questions as $question): ?>
+                                <div class="card">
+                                    <?php echo $index.". ". $question['questions']; ?>
+                                    <br>
+                                </div>
+                                <div>
+                                    <?php  
+                                        $answers = getAnswers($question['id']);
+                                     ?>  
+                                    <!-- Starting answers foreach loop -->
+                                    <?php foreach($answers as $answer): ?> 
+                                        <div> 
+                                             <input type="radio" name="quizcheck[<?php echo $answer['question_id'];  ?>]" value="<?php echo $answer['id'];  ?>"> 
+                                             <?php echo  $answer['answer']; ?>  
+                                         </div>
+                                    <!--  Ending answers foreach loop -->
+                                    <?php endforeach; ?>  
+                                </div>
+                                 <!-- Ending questions foreach loop -->
+                                <?php 
+                                        $index++; 
+                                        endforeach; 
+                                ?>
+                                <br>
+                                <input type="submit" name="submit" class="btn btn-primary" value="submit">
+                        </form>        
+                </div>
+          </div>
+          
+          <div class="tab-pane fade" id="javaTab" role="tabpanel" aria-labelledby="pills-Java-tab">
+                  <div class="container col-lg-8">
+                        <form action="check.php" method="post">
+                     
+                                <?php 
+                                    $questions = getQuestions('c');
+                                    $index=1;  
+                                ?>
+                                <!-- Starting questions foreach loop -->
+                                <?php foreach($questions as $question): ?>
+                                <div class="card">
+                                    <?php echo $index.". ". $question['questions']; ?>
+                                    <br>
+                                </div>
+                                <div>
+                                    <?php  
+                                        $answers = getAnswers($question['id']);
+                                     ?>  
+                                    <!-- Starting answers foreach loop -->
+                                    <?php foreach($answers as $answer): ?> 
+                                        <div> 
+                                             <input type="radio" name="quizcheck[<?php echo $answer['question_id'];  ?>]" value="<?php echo $answer['id'];  ?>"> 
+                                             <?php echo  $answer['answer']; ?>  
+                                        </div>
+                                    <!--  Ending answers foreach loop -->
+                                    <?php endforeach; ?>  
+                                </div>
+                                 <!-- Ending questions foreach loop -->
+                                 <?php 
+                                        $index++; 
+                                        endforeach; 
+                                ?>
+                                <br>
+                                <input type="submit" name="submit" class="btn btn-primary" value="submit">
+                        </form>        
+                </div>
+          </div>
+    
     </div>
 </body>
 
