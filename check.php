@@ -21,13 +21,10 @@ if(isset($_POST['submit']))
 
        if($correctAnswerId == $selectedAnswerId)
        {
-           $result++;
-           
+           $result++;         
        }
     }
   }
-
-
 }
 ?>
 <!DOCTYPE html>
@@ -55,7 +52,78 @@ if(isset($_POST['submit']))
                       </div>
                      <div class="col-lg-6 text-center">
                             <div>
-                                    <h4>Your score is <?php echo  $result ?></h4>
+                                    <h4>
+                                       <?php
+                                            if($result>8)
+                                            {
+                                                 echo "Congratulation! Your score is ".$result;
+                                         ?>
+                                                <script>
+                                                     $(function() {
+                                                     $("#myModal").modal();//if you want you can have a timeout to hide the window after x seconds
+                                                       });
+                                                 </script>
+                                                     
+                                                    <!-- Modal -->
+                                                 <div class="modal fade" id="myModal" role="dialog">
+                                                       <div class="modal-dialog">
+                                                     
+                                                            <!-- Modal content-->
+                                                           <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <h5>Congratulation! Do You Want To Play Next Round</h5>
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                          <a  href="" data-dismiss="modal" style="text-decoration: none; color: black; margin-right: 65%"  onclick="self.close()"><h5>Close</h5></a>
+                                                                          <a href="main.php" style="text-decoration: none; color: black"><h5>Next</h5></a>
+                                                                    </div>
+                                                             </div>
+                                                     
+                                                       </div>
+                                                 </div>
+                                             <?php
+                                            }  
+                                            else if($result==0)
+                                            {
+                                              echo "Sorry! You are fail";
+                                             ?>
+                                                <script>
+                                                    $(function() {
+                                                    $("#myModal").modal();//if you want you can have a timeout to hide the window after x seconds
+                                                    });
+                                                    </script>
+                                                     
+                                                    <!-- Modal -->
+                                                      <div class="modal fade" id="myModal" role="dialog">
+                                                           <div class="modal-dialog">
+                                                     
+                                                            <!-- Modal content-->
+                                                              <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <h1>Sorry! You are fail</h1>
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                          <a  href="" data-dismiss="modal" style="text-decoration: none; color: black; margin-right: 65%"  onclick="self.close()"><h5>Close</h5></a>
+                                                                          <a href="main.php" style="text-decoration: none; color: black"><h5>Play Again</h5></a>
+                                                                    </div>
+                                                              </div>
+                                                     
+                                                            </div>
+                                                      </div>
+                                             <?php
+                                            }    
+                                        ?>
+                                    </h4>
                             </div>
                       </div>
                  </div>

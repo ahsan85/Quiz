@@ -1,26 +1,33 @@
 <?php
+ include 'config.php'; 
 session_start();
+if (isset($_POST['playerName']) && isset($_POST['pwd']) )
+{
+$connection = mysqli_connect("$server", "$name", "$password","$db");
+$name=$_POST['playerName'];
+$pwd= $_POST['pwd'];
+$sql_q="SELECT * FROM users WHERE username='$name' and password='$pwd'";
+ var_dump($sql_q);
+$query=mysqli_query($connection,$sql_q);
+// var_dump($connection); 
 
-
- if(isset($_POST['login'])){ 
-    
-    if($_POST['playerName']=="admin" &&   $_POST['pwd']=="admin")
-    {
-        $_SESSION['isLoggedIn'] = true; 
-    }
-    else if($_POST['playerName']!="admin" ||   $_POST['pwd']!="admin")
-    {
-        echo "Error! Invalid password or user name";
-        $_SESSION['isLoggedIn'] = false; 
-    }
-   
-   
+$row=mysqli_fetch_assoc($query);
+ if(!empty($row))
+ { 
+     $_SESSION['isLoggedIn'] = true;  
+ }
+ else{
+    echo "Error! Invalid password or user name";
+    $_SESSION['isLoggedIn'] = false;
  }
 
  if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true)
  {
      header('Location: main.php');
  }
+
+ mysqli_close($connection);
+}
 ?>
 
 <!DOCTYPE html>

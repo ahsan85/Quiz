@@ -1,6 +1,6 @@
 <?php
    session_start();
-      
+     include 'config.php'; 
    if(isset($_POST['logout']))
    {
       $_SESSION['isLoggedIn'] = false;
@@ -17,7 +17,7 @@
     {
         $questions = [];
 
-        $connection = mysqli_connect("localhost", "root", "root","quizdatabase");
+        $connection = mysqli_connect("$server", "$name", "$password","$db");
 
         $sql = "SELECT * from questions";
         
@@ -113,7 +113,12 @@
             </div>
             <div>
                 <form action="" class="form" method="post">
-                    <button type="submit" name="logout" class="btn btn-primary " style="width: 100%">Logout</button>
+                    <button type="submit" name="addQA" class="btn btn-primary mr-1 " style="">+ Questions</button>
+                </form>
+            </div>
+            <div>       
+                <form action="" class="form" method="post">
+                    <button type="submit" name="logout" class="btn btn-primary mr-1" >Logout</button>
                 </form>
             </div>
         </nav>
@@ -124,6 +129,7 @@
           <div class="tab-pane fade show active " id="instTab" role="tabpanel" aria-labelledby="pills-inst-tab">
                 <div> 
                     <h4 class="text-center">WELCOME IN QUIZ GAME</h4>
+                    <p style="font-size: 20px">Here, You can test your knowledge in C, C++, C# and Java. It's depend on your interest What you want learn. This game contain 4 tabs of Mcqs, You can also logout from session. </p>
                 </div>
           </div>
           
