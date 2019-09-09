@@ -1,6 +1,6 @@
 <?php
-
-$connection = mysqli_connect("localhost", "root", "root","quizdatabase");
+include 'config.php';
+$connection = mysqli_connect($server,$name,$password,$db);
 if(isset($_POST['submit']))
 {
    if(!empty($_POST['quizcheck']))

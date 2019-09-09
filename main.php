@@ -1,6 +1,7 @@
 <?php
+  include 'config.php';
    session_start();
-     include 'config.php'; 
+   
    if(isset($_POST['logout']))
    {
       $_SESSION['isLoggedIn'] = false;
@@ -17,8 +18,8 @@
     {
         $questions = [];
 
-        $connection = mysqli_connect("$server", "$name", "$password","$db");
-
+        $connection = mysqli_connect('localhost','root','root','quizdatabase');
+       
         $sql = "SELECT * from questions";
         
         if($questionsType  != null)
@@ -46,7 +47,7 @@
     {
         $answers = [];
 
-        $connection = mysqli_connect("localhost", "root", "root","quizdatabase");
+        $connection = mysqli_connect('localhost','root','root','quizdatabase');
 
         $sql = "SELECT * from answers";
         
@@ -69,6 +70,12 @@
 
         return $answers;
     }
+
+
+if (isset($_POST['questionAnswers'])) {
+     header('Location: view_questions.php');
+    
+}
 
 
 ?>
@@ -113,7 +120,7 @@
             </div>
             <div>
                 <form action="" class="form" method="post">
-                    <button type="submit" name="addQA" class="btn btn-primary mr-1 " style="">+ Questions</button>
+                    <button type="submit" name="questionAnswers" class="btn btn-primary mr-1 " style="">Questions</button>
                 </form>
             </div>
             <div>       

@@ -3,7 +3,7 @@
 session_start();
 if (isset($_POST['playerName']) && isset($_POST['pwd']) )
 {
-$connection = mysqli_connect("$server", "$name", "$password","$db");
+$connection = mysqli_connect($server,$name,$password,$db);
 $name=$_POST['playerName'];
 $pwd= $_POST['pwd'];
 $sql_q="SELECT * FROM users WHERE username='$name' and password='$pwd'";
