@@ -73,19 +73,21 @@ if (isset($_POST['addQ'])) {
 </head>
 <body>
     <div>
-
-    	 <form method="POST" class="mt-5 float-right mr-2">
-    	 	<button class="btn btn-primary" type="submit" name="addQ">+ Questions</button>
+         <div class="bg-dark">
+            <div class="float-left">
+            <a href="main.php">
+                <img src="images\back.png" class="rounded-circle  ml-2 mt-4" style="width:40%">
+            </a>   
+          </div>
+    	 <form method="POST" class="">
+    	 	<button class="btn btn-primary  float-right mr-2 mt-4" type="submit" name="addQ">+ Questions</button>
     	 </form>
-    	       
+         <span class="text-center m-4 font-weight-bold " style="color: white"> <h1>Questions & Answers</h1></span>
+    	  
+          </div>     
          <div>
     	   	      <table class="table table-bordered ">
-    	 	 			<thead>
-    	 					  <td>
-    	 							<h2>Questions</h2>
-    	 					  </td>
-    	 					
-                        </thead>
+    	 	 			
                         <tbody>
                         	  <tr>
                         	     	<td>
@@ -98,7 +100,7 @@ if (isset($_POST['addQ'])) {
                                 <!-- Starting questions foreach loop -->
                                 <?php foreach($questions as $question): ?>
                                 <div class="card">   
-                                    <?php echo $index.". ". $question['questions']; ?> <a href="">Edit</a> <a href="delete_questions.php?delete=<?php echo $question['id'];  ?>">Delete</a>
+                                    <?php echo $index.". ". $question['questions']; ?> <a href="edit_questions.php?edit=<?php echo $question['id'];   ?>">Edit</a> <a href="delete_questions.php?delete=<?php echo $question['id'];  ?>">Delete</a>
   
                                    
                                 </div>

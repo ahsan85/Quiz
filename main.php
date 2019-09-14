@@ -26,15 +26,18 @@
         {
            $sql .= " WHERE type='".$questionsType."'";
         }
+
         $result = mysqli_query($connection, $sql);
+        // if result is not empty && it contains few rows
         if (!empty($result) && $result->num_rows > 0) {
-             // output data of each row 
+             // iterate over resultset and populate array 
+            // of questions
             while($row = mysqli_fetch_assoc($result)) {
                  $questions[] = $row;
             }
         }
         else{
-            echo "0 results";
+            echo "No data has been found";
         } 
 
         mysqli_close($connection); 
@@ -102,7 +105,7 @@ if (isset($_POST['questionAnswers'])) {
             </button>
             <div class="collapse navbar-collapse" id="colNav">
                 <ul class="navbar-nav nav" style="font-size:20px" role="tablist" id="pills-tab">
-                    <a class="navbar-brand" href="/">Quiz Game</a>
+                    <a class="navbar-brand" href="/main.php">Quiz Game</a>
                     <li class="nav-item">
                         <a  class="nav-link" id="pills-C-tab" data-toggle="pill" href="#cTab" role="tab" aria-controls="pills-home" aria-selected="false"> C Mcqs Test</a>
                     </li>
