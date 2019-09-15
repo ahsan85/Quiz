@@ -6,7 +6,7 @@ $connection= mysqli_connect('localhost','root','root','quizdatabase');
 if(isset($_POST['addQuestion']))
 { 
  
-  if (!empty($_POST['ques'])  &&  !empty($_POST['answers']) && !empty($_POST['correct']) && !empty($_POST['opType']) || $_POST['opType']=='c' || $_POST['opType']=='cpp' || $_POST['opType']=='c#'|| $_POST['opType']=='java') {
+  if (!empty($_POST['ques'])  &&  !empty($_POST['answers']) && !empty($_POST['correct']) && !empty($_POST['opType']) && $_POST['opType']=='c' || $_POST['opType']=='cpp' || $_POST['opType']=='c#'|| $_POST['opType']=='java') {
      // var_dump($_POST);
    //   die();
       $q = mysqli_real_escape_string($connection, $_POST['ques']);

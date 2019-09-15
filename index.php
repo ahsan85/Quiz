@@ -7,24 +7,31 @@ $connection = mysqli_connect($server,$name,$password,$db);
 $name=$_POST['playerName'];
 $pwd= $_POST['pwd'];
 $sql_q="SELECT * FROM users WHERE username='$name' and password='$pwd'";
- var_dump($sql_q);
+// var_dump($sql_q);
 $query=mysqli_query($connection,$sql_q);
 // var_dump($connection); 
 
 $row=mysqli_fetch_assoc($query);
- if(!empty($row))
- { 
-     $_SESSION['isLoggedIn'] = true;  
+// var_dump($row['role']);
+//  die();
+ if(!empty($row) && $row['role']=='admin' )
+ {  
+
+      $_SESSION['isLoggedIn'] = true;
+      if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true)
+      {
+         header('Location: admin_view.php');
+       }  
  }
  else{
     echo "Error! Invalid password or user name";
     $_SESSION['isLoggedIn'] = false;
  }
 
- if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true)
- {
-     header('Location: main.php');
- }
+ // if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true)
+ // {
+ //     header('Location: main.php');
+ // }
 
  mysqli_close($connection);
 }
