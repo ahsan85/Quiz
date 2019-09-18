@@ -12,7 +12,7 @@
         header('Location: index.php');
     }
 
-    
+ 
 
     function getQuestions($questionsType = null)
     {
@@ -74,11 +74,13 @@
         return $answers;
     }
 
-
+// var_dump($_SESSION['loggedInUser']['role']);
+// die();
 if (isset($_POST['questionAnswers'])) {
      header('Location: view_questions.php');
     
 }
+
 
 
 ?>
@@ -121,11 +123,17 @@ if (isset($_POST['questionAnswers'])) {
 
                 </ul>
             </div>
+            <?php   if (isset($_SESSION['loggedInUser']) && isset($_SESSION['loggedInUser']['role'])): ?>
+             <?php   if ($_SESSION['loggedInUser']['role']=='admin') { ?>
+                
+             
             <div>
                 <form action="" class="form" method="post">
                     <button type="submit" name="questionAnswers" class="btn btn-primary mr-1 " style="">Questions</button>
                 </form>
             </div>
+             <?php } ?>
+            <?php  endif  ?>
             <div>       
                 <form action="" class="form" method="post">
                     <button type="submit" name="logout" class="btn btn-primary mr-1" >Logout</button>

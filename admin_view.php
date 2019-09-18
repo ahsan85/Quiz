@@ -19,9 +19,14 @@ session_start();
      		</h1> 
      		<hr>
      	 </div>
-     	 <div class="float-right">
-     	      <a href="" title="view user">
-     	          <img src="images/view user.png">
+     	 <div class="float-right mt-3">
+     	      <a href="admin_user_detail_view.php" title="view user">
+     	          <img src="images/view_user.png">
+     	     </a>
+        </div>
+         <div class="float-left">
+     	      <a href="main.php" title="Question and answer">
+     	          <img src="images/question&ans.jpg">
      	     </a>
         </div>
     </div>

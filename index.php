@@ -6,21 +6,25 @@ if (isset($_POST['playerName']) && isset($_POST['pwd']) )
 $connection = mysqli_connect($server,$name,$password,$db);
 $name=$_POST['playerName'];
 $pwd= $_POST['pwd'];
-$sql_q="SELECT * FROM users WHERE username='$name' and password='$pwd'";
-// var_dump($sql_q);
-$query=mysqli_query($connection,$sql_q);
-// var_dump($connection); 
+$sql_q="SELECT * FROM users WHERE username='$name' and password='$pwd' ";
+ $query=mysqli_query($connection,$sql_q);
+ 
 
 $row=mysqli_fetch_assoc($query);
-// var_dump($row['role']);
-//  die();
- if(!empty($row) && $row['role']=='admin' )
- {  
-
+ 
+ if(!empty($row) )
+ {         
       $_SESSION['isLoggedIn'] = true;
+      $_SESSION['loggedInUser']=$row;
+      
+
       if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true)
       {
-         header('Location: admin_view.php');
+           if($row['role']=='admin'){
+                header('Location: admin_view.php');
+          } else if ($row['role']=='player') {
+                header('Location:main.php');
+          }
        }  
  }
  else{
@@ -28,10 +32,6 @@ $row=mysqli_fetch_assoc($query);
     $_SESSION['isLoggedIn'] = false;
  }
 
- // if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true)
- // {
- //     header('Location: main.php');
- // }
 
  mysqli_close($connection);
 }
