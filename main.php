@@ -1,24 +1,28 @@
 <?php
-  include 'config.php';
-   session_start();
-   
-   if(isset($_POST['logout']))
-   {
-      $_SESSION['isLoggedIn'] = false;
-   }
+include 'includes/app.php';
+include 'includes/functions.php';
 
-   if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == false)
-    {
-        header('Location: index.php');
-    }
+session_start();
 
+$_SESSION['config'] = $config;
+  
  
+if(isset($_POST['logout']))
+{
+    $_SESSION['isLoggedIn'] = false;
+}
 
-    function getQuestions($questionsType = null)
+if(!isUserLoggedIn())
+{
+    header('Location: index.php');
+}
+
+function getQuestions($questionsType = null)
     {
+        
         $questions = [];
 
-        $connection = mysqli_connect('localhost','root','root','quizdatabase');
+        $connection = mysqli_connect(config('database.server'),config('database.username'),config('database.password'),config('database.name'));
        
         $sql = "SELECT * from questions";
         
@@ -95,7 +99,7 @@ if (isset($_POST['questionAnswers'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>Document</title>
+    <title><?php echo isset($config['general']['app_name']) ? $config['general']['app_name'] : ''  ?></title>
 
 </head>
 

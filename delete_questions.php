@@ -1,7 +1,19 @@
 <?php
+include 'includes/app.php';
+include 'includes/functions.php';
 session_start();
+if(!isUserLoggedIn())
+{
+	echo "404 HTTP Error (Not Found)";
+	die();
+}
 
-$connection= mysqli_connect('localhost','root','root','quizdatabase');
+if(isUserHasRole("player")) {
+	echo "You are not allowed to access this file";
+	die();
+}
+$connection =  mysqli_connect(config('database.server'),config('database.username'),config('database.password'),config('database.name'));
+
 
 	if(isset($_GET['delete']))
 		{

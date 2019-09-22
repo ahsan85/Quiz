@@ -1,6 +1,20 @@
 <?php
-include 'config.php';
-$connection = mysqli_connect($server,$name,$password,$db);
+include 'includes/app.php';
+include 'includes/functions.php';
+session_start();
+if(!isUserLoggedIn())
+{
+    echo "404 HTTP Error (Not Found)";
+    die();
+}
+
+if(isUserHasRole("player"))
+{
+    echo "You are not allowed to access this file";
+    die();
+}
+
+$connection =  mysqli_connect(config('database.server'),config('database.username'),config('database.password'),config('database.name'));
 if(isset($_POST['submit']))
 {
    if(!empty($_POST['quizcheck']))
