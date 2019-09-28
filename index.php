@@ -4,7 +4,7 @@ include 'includes/functions.php';
 
 session_start();
 
-
+$_SESSION['errors'] = [];
 $_SESSION['config'] = $config;
 
 if (isUserLoggedIn()) {
@@ -31,6 +31,7 @@ if (isset($_POST['login'])) {
         $row = mysqli_fetch_assoc($query);
 
         if (!empty($row)) {
+
             $_SESSION['isLoggedIn'] = true;
             $_SESSION['loggedInUser'] = $row;
 
@@ -43,8 +44,11 @@ if (isset($_POST['login'])) {
                 }
             }
         } else {
-            echo "Error! Invalid password or user name";
+
             $_SESSION['isLoggedIn'] = false;
+            $_SESSION['errors']['password'] = "Invalid username and password !";
+
+
         }
 
 
@@ -152,23 +156,25 @@ if (isset($_POST['login'])) {
                 <div class="col-sm-12">
                     <h3 class="text-center m-5" style="color: white">
                         Hello, Friends.
+
                     </h3>
+
                 </div>
             </div>
 
             <div id="divLoginSection" style="height: 100%" class="main-div col-md-6 col-sm-12 col-xs-12">
 
                 <h1 class="text-center m-5" style="font-family:URW Chancery L, cursive">
-                    <img src="images\login.png" alt="login Image"> Here
+                    <img src="images\login.png" alt="login Image" class="img-responsive"> Here
                 </h1>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <img src="images\user.png" alt="user img" style="width: 23px; height:23px"
-                                     class="rounded-circle ">
+                                     class="rounded-circle img-responsive ">
                             </span>
                     </div>
-                    <input type="text" class="form-control" id="playerName" name="playerName"
+                    <input type="text" class="form-control" id="playerName" name="playerName" required
                            placeholder="Enter Player Name">
 
                 </div>
@@ -176,11 +182,15 @@ if (isset($_POST['login'])) {
                     <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <img src="images\key.png" alt="password img" style="width: 23px; height:23px"
-                                     class="rounded-circle ">
+                                     class="rounded-circle img-responsive ">
                             </span>
                     </div>
-                    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter Password">
+                    <input type="password" class="form-control" id="pwd" name="pwd" required
+                           placeholder="Enter Password">
                 </div>
+                <?php if (isset($_SESSION['errors']['password'])) {
+                    echo $_SESSION['errors']['password'];
+                } ?>
                 <button type="submit" name="login" class="btn btn-primary" style="width: 100%">Login</button>
 
             </div>
